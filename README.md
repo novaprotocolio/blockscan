@@ -7,6 +7,7 @@ Novalex Scan is an Ethereum blockchain explorer built with NodeJS, Express and P
 While there are several excellent Ethereum blockchain explorers available (etherscan, ether.camp and novalex) they operate on a fixed subset of Ethereum networks, usually the mainnet and testnet. Currently there are no network agnostic blockchain explorers available. If you want to develop Dapps on a private testnet or would like to launch a private / consortium network, Novalex Scan will allow you to quickly explore such chains.
 
 A demo instance connected to the Kovan Ethereum testnet is available at [scan.novalex.org](http://scan.novalex.org).
+
 ![demo](./assets/blockscan.png)
 
 ## Current Features
