@@ -92,7 +92,7 @@ router.get('/:account', function(req, res, next) {
         }
       },
       function(callback) {
-        web3.trace.filter(
+        web3.eth.subscribe(
           {
             fromBlock: '0x' + data.fromBlock.toString(16),
             fromAddress: [req.params.account]
@@ -104,7 +104,7 @@ router.get('/:account', function(req, res, next) {
       },
       function(tracesSent, callback) {
         data.tracesSent = tracesSent;
-        web3.trace.filter(
+        web3.eth.subscribe(
           {
             fromBlock: '0x' + data.fromBlock.toString(16),
             toAddress: [req.params.account]

@@ -14,15 +14,21 @@ router.get('/pending', function(req, res, next) {
   async.waterfall(
     [
       function(callback) {
-        web3.parity.pendingTransactions(function(err, result) {
-          callback(err, result);
-        });
+        callback();
+        // web3.eth.filter('pending').watch(function(err, result) {
+        //   callback(err, result);
+        // });
+        // web3.parity.pendingTransactions(function(err, result) {
+        //   callback(err, result);
+        // });
       }
     ],
     function(err, txs) {
       if (err) {
         return next(err);
       }
+
+      console.log(txs);
 
       res.render('tx_pending', { txs: txs });
     }
@@ -90,7 +96,7 @@ router.get('/:tx', function(req, res, next) {
         });
       },
       function(tx, receipt, callback) {
-        web3.trace.transaction(tx.hash, function(err, traces) {
+        web3.eth.subscribe(tx.hash, function(err, traces) {
           callback(err, tx, receipt, traces);
         });
       },

@@ -14,7 +14,7 @@ var contract = require('./routes/contract');
 var signature = require('./routes/signature');
 var search = require('./routes/search');
 
-var config = new(require('./config.js'))();
+var config = new (require('./config.js'))();
 
 var levelup = require('levelup');
 var leveldown = require('leveldown');
@@ -30,20 +30,24 @@ app.set('db', db);
 app.set('trust proxy', true);
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger(config.logFormat));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+if (process.env.NODE_ENV === 'development') {
+  app.use(logger(config.logFormat));
+}
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.locals.moment = require('moment');
 app.locals.numeral = require('numeral');
 app.locals.ethformatter = require('./utils/ethformatter.js');
-app.locals.nameformatter = new(require('./utils/nameformatter.js'))(config);
-app.locals.nodeStatus = new(require('./utils/nodeStatus.js'))(config);
+app.locals.nameformatter = new (require('./utils/nameformatter.js'))(config);
+app.locals.nodeStatus = new (require('./utils/nodeStatus.js'))(config);
 app.locals.config = config;
 
 app.use('/', index);
